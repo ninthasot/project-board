@@ -26,8 +26,8 @@ public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
             .HasForeignKey(a => a.CardId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        // Index for fast lookup
         builder.HasIndex(a => a.CardId);
-
         builder.HasIndex(a => a.UploadedBy);
     }
 }
