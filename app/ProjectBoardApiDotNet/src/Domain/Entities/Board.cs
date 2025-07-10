@@ -1,6 +1,12 @@
 ﻿namespace Domain.Entities;
 
-public sealed class Board
+public sealed class Board : BaseAuditableEntity<Guid>
 {
-    public Guid Id { get; set; }
+    public required string Title { get; set; }
+    public required string Description { get; set; }
+
+    // Navigation properties
+    public ICollection<Column> Columns { get; } = new List<Column>();
+    public ICollection<Label> Labels { get; } = new List<Label>();
+    public ICollection<BoardMember> BoardMembers { get; } = new List<BoardMember>();
 }
