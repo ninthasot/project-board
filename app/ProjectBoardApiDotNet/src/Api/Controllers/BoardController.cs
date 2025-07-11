@@ -2,11 +2,13 @@
 
 namespace Api.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public sealed class BoardController() : ControllerBase
 {
-    [HttpGet]
-    public ActionResult<int> Get()
+    [HttpGet("ping")]
+    public IActionResult Ping()
     {
-        return Ok(1);
+        return Ok("pong");
     }
 }

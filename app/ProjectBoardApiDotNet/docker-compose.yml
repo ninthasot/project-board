@@ -6,5 +6,11 @@ services:
       dockerfile: src/Api/Dockerfile
     ports:
       - "5000:8080"
+      - "5001:8081"
     environment:
-      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_URLS=http://+:8080;https://+:8081
+      - ASPNETCORE_HTTPS_PORT=8081
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Pass123
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/https:ro
