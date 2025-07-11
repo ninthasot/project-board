@@ -24,6 +24,7 @@ csharp_style_prefer_null_check_over_type_check = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
 csharp_style_prefer_local_over_anonymous_function = true:suggestion
 csharp_style_prefer_index_operator = true:suggestion
+dotnet_diagnostic.CA1515.severity = suggestion
 
 [*.{cs,vb}]
 #### Naming styles ####
