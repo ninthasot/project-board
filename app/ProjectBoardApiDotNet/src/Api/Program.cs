@@ -14,28 +14,33 @@ var otlpEndpoint = builder.Configuration["OpenTelemetry:OtlpEndpoint"];
 if (string.IsNullOrWhiteSpace(otlpEndpoint))
     throw new InvalidOperationException("OpenTelemetry:OtlpEndpoint configuration is missing.");
 
+// Explicit error logging for OTLP exporter
 builder
     .Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
     .WithTracing(tracing =>
+    {
         tracing
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddOtlpExporter(options =>
             {
-                options.Endpoint = new Uri(otlpEndpoint); // Container name and OTLP port
-            })
-    )
+                options.Endpoint = new Uri(otlpEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+            });
+    })
     .WithMetrics(metrics =>
+    {
         metrics
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddRuntimeInstrumentation()
             .AddOtlpExporter(options =>
             {
-                options.Endpoint = new Uri(otlpEndpoint!);
-            })
-    );
+                options.Endpoint = new Uri(otlpEndpoint);
+                options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
+            });
+    });
 
 builder.AddDataBase();
 
@@ -44,10 +49,6 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
-
-Log.Information("OpenTelemetry has been initialized and configured.");
-
-Log.Debug("Test OpenTelemetry log");
 
 if (app.Environment.IsDevelopment())
 {
