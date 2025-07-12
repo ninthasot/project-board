@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Update="Domain\DomainError.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -12,12 +10,10 @@
       <DependentUpon>DomainError.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Domain\DomainError.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DomainError.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>
