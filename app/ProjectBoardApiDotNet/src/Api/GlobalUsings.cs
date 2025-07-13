@@ -1,2 +1,10 @@
-// Global usings for Api project
 global using System;
+global using Attachments.Infrastructure;
+global using Boards.Infrastructure;
+global using Cards.Infrastructure;
+global using CheckLists.Infrastructure;
+global using Comments.Infrastructure;
+global using Identity.Infrastructure;
+global using Labels.Infrastructure;
+global using Microsoft.EntityFrameworkCore;
+global using Users.Infrastructure;

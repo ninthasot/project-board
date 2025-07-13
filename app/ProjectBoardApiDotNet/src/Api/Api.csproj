@@ -6,6 +6,11 @@
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
@@ -21,9 +26,11 @@
     <ProjectReference Include="..\Features\Boards\Boards.csproj" />
     <ProjectReference Include="..\Features\Cards\Cards.csproj" />
     <ProjectReference Include="..\Features\Labels\Labels.csproj" />
+    <ProjectReference Include="..\Features\CheckLists\CheckLists.csproj" />
     <ProjectReference Include="..\Features\Comments\Comments.csproj" />
     <ProjectReference Include="..\Features\Attachments\Attachments.csproj" />
     <ProjectReference Include="..\Features\CheckLists\CheckLists.csproj" />
+    <ProjectReference Include="..\Features\Users\Users.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Identity\Identity.csproj" />
     <ProjectReference Include="..\Resources\Resources.csproj" />

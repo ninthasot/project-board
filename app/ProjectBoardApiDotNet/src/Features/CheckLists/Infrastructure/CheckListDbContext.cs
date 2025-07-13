@@ -2,7 +2,7 @@
 
 namespace CheckLists.Infrastructure;
 
-internal class CheckListDbContext(DbContextOptions<CheckListDbContext> options) : DbContext(options)
+public class CheckListDbContext(DbContextOptions<CheckListDbContext> options) : DbContext(options)
 {
     public DbSet<CheckList> CheckLists { get; set; }
     public DbSet<CheckListItem> CheckListItems { get; set; }

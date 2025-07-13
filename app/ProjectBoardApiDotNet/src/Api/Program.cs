@@ -1,7 +1,4 @@
 using Api;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 using Serilog;
 
@@ -22,6 +19,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    await app.ApplyMigrationAsync();
     app.MapOpenApi();
     app.MapScalarApiReference();
 }

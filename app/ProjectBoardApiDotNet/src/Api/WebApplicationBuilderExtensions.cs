@@ -1,11 +1,9 @@
-﻿using Infrastructure;
-using Infrastructure.Identity;
-using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using SharedKernel.Constants;
+using Users.Infrastructure;
 
 namespace Api;
 
@@ -13,14 +11,86 @@ internal static class WebApplicationBuilderExtensions
 {
     public static WebApplicationBuilder AddDataBase(this WebApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<ProjectBoardDbContext>(options =>
+        builder.Services.AddDbContext<AttachmentDbContext>(options =>
         {
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString("DefaultConnection"),
                 npgsqlOptions =>
                     npgsqlOptions.MigrationsHistoryTable(
                         HistoryRepository.DefaultTableName,
-                        DatabaseSchema.ProjectBoard
+                        DatabaseSchema.Attachment
+                    )
+            );
+        });
+
+        builder.Services.AddDbContext<BoardDbContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions =>
+                    npgsqlOptions.MigrationsHistoryTable(
+                        HistoryRepository.DefaultTableName,
+                        DatabaseSchema.Board
+                    )
+            );
+        });
+
+        builder.Services.AddDbContext<CardDbContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions =>
+                    npgsqlOptions.MigrationsHistoryTable(
+                        HistoryRepository.DefaultTableName,
+                        DatabaseSchema.Card
+                    )
+            );
+        });
+
+        builder.Services.AddDbContext<CheckListDbContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions =>
+                    npgsqlOptions.MigrationsHistoryTable(
+                        HistoryRepository.DefaultTableName,
+                        DatabaseSchema.CheckList
+                    )
+            );
+        });
+
+        builder.Services.AddDbContext<CommentDbContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions =>
+                    npgsqlOptions.MigrationsHistoryTable(
+                        HistoryRepository.DefaultTableName,
+                        DatabaseSchema.Comment
+                    )
+            );
+        });
+
+        builder.Services.AddDbContext<LabelDbContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions =>
+                    npgsqlOptions.MigrationsHistoryTable(
+                        HistoryRepository.DefaultTableName,
+                        DatabaseSchema.Label
+                    )
+            );
+        });
+
+        builder.Services.AddDbContext<UserDbContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                npgsqlOptions =>
+                    npgsqlOptions.MigrationsHistoryTable(
+                        HistoryRepository.DefaultTableName,
+                        DatabaseSchema.User
                     )
             );
         });
