@@ -8,8 +8,6 @@ public class CheckListConfiguration : IEntityTypeConfiguration<CheckList>
 
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.Id).IsRequired();
-
         builder.Property(c => c.CardId).IsRequired();
 
         builder.Property(c => c.Title).IsRequired().HasMaxLength(200);

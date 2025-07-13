@@ -12,16 +12,11 @@ public class CardLabelConfiguration : IEntityTypeConfiguration<CardLabel>
 
         builder.Property(cl => cl.LabelId).IsRequired();
 
+        // Relationships
         builder
             .HasOne(cl => cl.Card)
             .WithMany(c => c.CardLabels)
             .HasForeignKey(cl => cl.CardId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder
-            .HasOne(cl => cl.Label)
-            .WithMany(l => l.CardLabels)
-            .HasForeignKey(cl => cl.LabelId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Index for fast lookup

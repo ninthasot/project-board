@@ -20,12 +20,6 @@ public class ColumnConfiguration : IEntityTypeConfiguration<Column>
             .HasForeignKey(col => col.BoardId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder
-            .HasMany(col => col.Cards)
-            .WithOne(c => c.Column)
-            .HasForeignKey(c => c.ColumnId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         // Indexes for fast lookup
         builder.HasIndex(col => col.BoardId);
         builder.HasIndex(col => col.Title);

@@ -17,27 +17,9 @@ public class CardConfiguration : IEntityTypeConfiguration<Card>
         builder.Property(c => c.Position).IsRequired();
 
         builder
-            .HasOne(c => c.Column)
-            .WithMany(col => col.Cards)
-            .HasForeignKey(c => c.ColumnId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder
-            .HasMany(c => c.Comments)
-            .WithOne(cm => cm.Card)
-            .HasForeignKey(cm => cm.CardId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder
             .HasMany(c => c.CardLabels)
             .WithOne(cl => cl.Card)
             .HasForeignKey(cl => cl.CardId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder
-            .HasMany(c => c.Attachments)
-            .WithOne(a => a.Card)
-            .HasForeignKey(a => a.CardId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Indexes for fast lookup

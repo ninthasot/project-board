@@ -8,8 +8,6 @@ public class CheckListItemConfiguration : IEntityTypeConfiguration<CheckListItem
 
         builder.HasKey(i => i.Id);
 
-        builder.Property(i => i.Id).IsRequired();
-
         builder.Property(i => i.CheckListId).IsRequired();
 
         builder.Property(i => i.Content).IsRequired().HasMaxLength(500);

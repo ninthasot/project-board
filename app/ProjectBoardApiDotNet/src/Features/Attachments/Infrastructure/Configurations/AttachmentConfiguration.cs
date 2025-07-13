@@ -10,6 +10,8 @@ public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
 
         builder.HasKey(a => a.Id);
 
+        builder.Property(a => a.CardId).IsRequired();
+
         builder.Property(a => a.FileName).IsRequired().HasMaxLength(255);
 
         builder.Property(a => a.FileType).IsRequired().HasMaxLength(100);
@@ -21,12 +23,6 @@ public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
         builder.Property(a => a.UploadedAtUtc).IsRequired();
 
         builder.Property(a => a.UploadedBy).IsRequired();
-
-        builder
-            .HasOne(a => a.Card)
-            .WithMany(c => c.Attachments)
-            .HasForeignKey(a => a.CardId)
-            .OnDelete(DeleteBehavior.Cascade);
 
         // Index for fast lookup
         builder.HasIndex(a => a.CardId);
