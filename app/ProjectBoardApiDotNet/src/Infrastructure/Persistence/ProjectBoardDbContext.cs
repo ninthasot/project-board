@@ -16,8 +16,6 @@ public sealed class ProjectBoardDbContext(DbContextOptions<ProjectBoardDbContext
     {
         ArgumentNullException.ThrowIfNull(modelBuilder);
 
-        modelBuilder.HasDefaultSchema(DatabaseSchema.ProjectBoard);
-
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProjectBoardDbContext).Assembly);
     }
 }
