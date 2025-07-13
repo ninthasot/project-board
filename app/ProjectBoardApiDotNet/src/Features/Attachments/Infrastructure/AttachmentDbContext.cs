@@ -1,4 +1,5 @@
-﻿using SharedKernel.Constants;
+﻿using Attachments.Infrastructure.Configurations;
+using SharedKernel.Constants;
 
 namespace Attachments.Infrastructure;
 
@@ -12,6 +13,6 @@ public class AttachmentDbContext(DbContextOptions<AttachmentDbContext> options) 
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.Attachment);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AttachmentDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new AttachmentConfiguration());
     }
 }

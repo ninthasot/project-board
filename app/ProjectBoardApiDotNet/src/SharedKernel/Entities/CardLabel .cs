@@ -7,5 +7,4 @@ public class CardLabel : BaseEntity<Guid>
 
     // Navigation properties
     public Card? Card { get; set; }
-    public Label? Label { get; set; }
 }

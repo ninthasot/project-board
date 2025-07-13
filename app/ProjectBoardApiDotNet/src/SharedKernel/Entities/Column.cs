@@ -8,5 +8,4 @@ public sealed class Column : BaseAuditableEntity<Guid>
 
     // Navigation properties
     public Board? Board { get; set; }
-    public ICollection<Card> Cards { get; } = new List<Card>();
 }

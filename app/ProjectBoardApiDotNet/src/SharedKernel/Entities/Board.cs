@@ -7,6 +7,5 @@ public sealed class Board : BaseAuditableEntity<Guid>
 
     // Navigation properties
     public ICollection<Column> Columns { get; } = new List<Column>();
-    public ICollection<Label> Labels { get; } = new List<Label>();
     public ICollection<BoardMember> BoardMembers { get; } = new List<BoardMember>();
 }

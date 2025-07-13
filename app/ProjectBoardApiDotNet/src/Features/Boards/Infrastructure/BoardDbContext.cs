@@ -1,4 +1,5 @@
-﻿using SharedKernel.Constants;
+﻿using Boards.Infrastructure.Configurations;
+using SharedKernel.Constants;
 
 namespace Boards.Infrastructure;
 
@@ -14,6 +15,10 @@ public class BoardDbContext(DbContextOptions<BoardDbContext> options) : DbContex
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.Board);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BoardDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new BoardConfiguration());
+
+        modelBuilder.ApplyConfiguration(new BoardMemberConfiguration());
+
+        modelBuilder.ApplyConfiguration(new ColumnConfiguration());
     }
 }

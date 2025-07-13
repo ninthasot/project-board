@@ -1,4 +1,5 @@
-﻿using SharedKernel.Constants;
+﻿using CheckLists.Infrastructure.Configurations;
+using SharedKernel.Constants;
 
 namespace CheckLists.Infrastructure;
 
@@ -13,6 +14,8 @@ public class CheckListDbContext(DbContextOptions<CheckListDbContext> options) : 
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.CheckList);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CheckListDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new CheckListConfiguration());
+
+        modelBuilder.ApplyConfiguration(new CheckListItemConfiguration());
     }
 }

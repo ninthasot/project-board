@@ -1,4 +1,5 @@
-﻿using SharedKernel.Constants;
+﻿using Cards.Infrastructure.Configurations;
+using SharedKernel.Constants;
 
 namespace Cards.Infrastructure;
 
@@ -13,6 +14,8 @@ public class CardDbContext(DbContextOptions<CardDbContext> options) : DbContext(
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.Card);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CardDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new CardConfiguration());
+
+        modelBuilder.ApplyConfiguration(new CardLabelConfiguration());
     }
 }

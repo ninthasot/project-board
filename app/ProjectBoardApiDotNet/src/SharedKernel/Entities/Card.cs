@@ -8,9 +8,5 @@ public sealed class Card : BaseAuditableEntity<Guid>
     public int Position { get; set; }
 
     // Navigation properties
-    public Column? Column { get; set; }
-    public ICollection<Comment> Comments { get; } = new List<Comment>();
     public ICollection<CardLabel> CardLabels { get; } = new List<CardLabel>();
-    public ICollection<Attachment> Attachments { get; } = new List<Attachment>();
-    public ICollection<CheckList> CheckLists { get; } = new List<CheckList>();
 }

@@ -1,4 +1,5 @@
-﻿using SharedKernel.Constants;
+﻿using Labels.Infrastructure.Configurations;
+using SharedKernel.Constants;
 
 namespace Labels.Infrastructure;
 
@@ -12,6 +13,6 @@ public class LabelDbContext(DbContextOptions<LabelDbContext> options) : DbContex
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.Label);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(LabelDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new LabelConfiguration());
     }
 }

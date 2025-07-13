@@ -1,4 +1,5 @@
 ﻿using SharedKernel.Constants;
+using Users.Infrastructure.Configurations;
 
 namespace Users.Infrastructure;
 
@@ -12,6 +13,6 @@ public class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.User);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
     }
 }

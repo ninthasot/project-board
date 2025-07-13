@@ -1,4 +1,5 @@
-﻿using SharedKernel.Constants;
+﻿using Comments.Infrastructure.Configurations;
+using SharedKernel.Constants;
 
 namespace Comments.Infrastructure;
 
@@ -12,6 +13,6 @@ public class CommentDbContext(DbContextOptions<CommentDbContext> options) : DbCo
 
         modelBuilder.HasDefaultSchema(DatabaseSchema.Comment);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommentDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new CommentConfiguration());
     }
 }

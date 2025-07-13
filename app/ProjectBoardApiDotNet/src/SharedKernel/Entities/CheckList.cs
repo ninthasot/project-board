@@ -6,6 +6,5 @@ public sealed class CheckList : BaseEntity<Guid>
     public required string Title { get; set; }
 
     // Navigation properties
-    public Card? Card { get; set; }
     public ICollection<CheckListItem> Items { get; } = new List<CheckListItem>();
 }
