@@ -1,7 +1,12 @@
 using Api;
 using Api.Middlewares;
+using Boards.Application.Abstractions;
+using Boards.Infrastructure.Repositories;
+using FluentValidation;
+using MediatR;
 using Scalar.AspNetCore;
 using Serilog;
+using SharedKernel.Application.Behaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +17,19 @@ builder.AddTelemetry();
 
 builder.AddDataBase();
 
+//builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddMediatR(options =>
+{
+    options.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+});
+
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
@@ -20,7 +38,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    await app.ApplyMigrationAsync();
+    //await app.ApplyMigrationAsync();
     app.MapOpenApi();
     app.MapScalarApiReference();
 }

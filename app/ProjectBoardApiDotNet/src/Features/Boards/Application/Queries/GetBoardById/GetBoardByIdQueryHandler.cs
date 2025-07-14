@@ -23,7 +23,13 @@ public sealed record GetBoardByIdQueryHandler : IRequestHandler<GetBoardByIdQuer
         if (board is null)
             return Result.Fail(SharedErrorFactory.NotFound);
 
-        var dto = new BoardDto { Id = board.Id };
+        var dto = new BoardDto
+        {
+            Id = board.Id,
+            Title = board.Title,
+            Description = board.Description,
+            CreatedAtUtc = board.CreatedAtUtc,
+        };
 
         return Result.Ok(dto);
     }

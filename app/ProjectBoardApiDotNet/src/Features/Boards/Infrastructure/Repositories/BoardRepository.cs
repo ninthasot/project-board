@@ -17,4 +17,13 @@ public sealed class BoardRepository : IBoardRepository
 
         return response;
     }
+
+    public async Task<Board> AddAsync(Board entity, CancellationToken cancellationToken = default)
+    {
+        _context.Boards.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return entity;
+    }
 }

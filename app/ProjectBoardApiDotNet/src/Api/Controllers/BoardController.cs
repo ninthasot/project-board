@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Security.Cryptography;
 using Api.Controllers.Base;
+using Boards.Application.Commands.CreateBoard;
 using Boards.Application.DTO;
 using Boards.Application.Queries.GetBoardById;
 using MediatR;
@@ -31,5 +32,17 @@ public sealed class BoardController : BaseController
         var result = await Mediator.Send(new GetBoardByIdQuery(id));
 
         return ToOkActionResult(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Guid>> CreateBoard([FromBody] CreateBoardDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var command = new CreateBoardCommand(dto.Title, dto.Description);
+
+        var result = await Mediator.Send(command);
+
+        return ToCreatedActionResult(result, nameof(GetBoardById), new { id = result.Value });
     }
 }
