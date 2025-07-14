@@ -1,12 +1,4 @@
-﻿using System.Text.Json;
-using Api.Constants;
-using Api.Helpers;
-using Api.Resources;
-using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
-using Npgsql;
-
-namespace Api.Middlewares;
+﻿namespace Api.Middlewares;
 
 public class CustomExceptionHandlerMiddleware
 {

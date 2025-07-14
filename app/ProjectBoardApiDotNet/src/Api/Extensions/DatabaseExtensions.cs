@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Users.Infrastructure;
-
-namespace Api;
+﻿namespace Api.Extensions;
 
 public static class DatabaseExtensions
 {

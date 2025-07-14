@@ -1,7 +1,4 @@
-﻿using Boards.Infrastructure.Configurations;
-using SharedKernel.Constants;
-
-namespace Boards.Infrastructure;
+﻿namespace Boards.Infrastructure;
 
 public class BoardDbContext(DbContextOptions<BoardDbContext> options) : DbContext(options)
 {

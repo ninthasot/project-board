@@ -1,6 +1,4 @@
-﻿using SharedKernel.Errors;
-
-namespace Boards.Application.Queries.GetBoardById;
+﻿namespace Boards.Application.Queries.GetBoardById;
 
 public sealed record GetBoardByIdQueryHandler : IRequestHandler<GetBoardByIdQuery, Result<BoardDto>>
 {

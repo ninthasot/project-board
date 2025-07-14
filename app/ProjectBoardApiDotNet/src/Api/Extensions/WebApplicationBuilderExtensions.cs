@@ -1,11 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-using SharedKernel.Constants;
-using Users.Infrastructure;
-
-namespace Api;
+﻿namespace Api.Extensions;
 
 internal static class WebApplicationBuilderExtensions
 {

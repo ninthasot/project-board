@@ -1,7 +1,4 @@
-﻿using Boards.Resources;
-using FluentValidation;
-
-namespace Boards.Application.Commands.CreateBoard;
+﻿namespace Boards.Application.Commands.CreateBoard;
 
 public class CreateBoardValidator : AbstractValidator<CreateBoardCommand>
 {

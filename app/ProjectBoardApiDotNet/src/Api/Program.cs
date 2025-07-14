@@ -1,13 +1,3 @@
-using Api;
-using Api.Middlewares;
-using Boards.Application.Abstractions;
-using Boards.Infrastructure.Repositories;
-using FluentValidation;
-using MediatR;
-using Scalar.AspNetCore;
-using Serilog;
-using SharedKernel.Application.Behaviors;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog for structured logging

@@ -1,13 +1,4 @@
-﻿using System.Diagnostics;
-using System.Security.Cryptography;
-using Api.Controllers.Base;
-using Boards.Application.Commands.CreateBoard;
-using Boards.Application.DTO;
-using Boards.Application.Queries.GetBoardById;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Api.Controllers;
+﻿namespace Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

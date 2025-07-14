@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using SharedKernel.Entities;
-
-namespace Boards.Application.Abstractions;
+﻿namespace Boards.Domain.Abstractions;
 
 public interface IBoardRepository
 {

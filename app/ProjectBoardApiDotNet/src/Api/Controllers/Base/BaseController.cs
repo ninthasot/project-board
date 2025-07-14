@@ -1,11 +1,4 @@
-﻿using Api.Constants;
-using Api.Helpers;
-using FluentResults;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using SharedKernel.Errors;
-
-namespace Api.Controllers.Base;
+﻿namespace Api.Controllers.Base;
 
 public abstract class BaseController : ControllerBase
 {

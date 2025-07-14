@@ -1,7 +1,12 @@
-﻿global using Boards.Application.Abstractions;
-global using Boards.Application.DTO;
+﻿global using Boards.Application.DTO;
+global using Boards.Domain.Abstractions;
+global using Boards.Infrastructure.Configurations;
+global using Boards.Resources;
 global using FluentResults;
+global using FluentValidation;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using SharedKernel.Constants;
 global using SharedKernel.Entities;
+global using SharedKernel.Errors;
