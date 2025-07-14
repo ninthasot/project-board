@@ -1,4 +1,5 @@
 using Api;
+using Api.Middlewares;
 using Scalar.AspNetCore;
 using Serilog;
 
@@ -23,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
+
+app.UseMiddleware<CustomExceptionHandlerMiddleware>();
 
 //app.UseHttpsRedirection();
 

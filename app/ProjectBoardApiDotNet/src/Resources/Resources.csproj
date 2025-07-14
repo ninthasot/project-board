@@ -4,6 +4,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Api\HttpError.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HttpError.resx</DependentUpon>
+    </Compile>
     <Compile Update="Domain\DomainError.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -11,6 +16,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Api\HttpError.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HttpError.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Domain\DomainError.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DomainError.Designer.cs</LastGenOutput>
