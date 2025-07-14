@@ -6,6 +6,6 @@ public class ValidationError : CustomError
     private const string DEFAULT_CODE = "validation_error";
     private const string DEFAULT_MESSAGE = "Validation Error";
 
-    public ValidationError()
-        : base(STATUS_CODE, DEFAULT_CODE, DEFAULT_MESSAGE) { }
+    public ValidationError(string msg)
+        : base(STATUS_CODE, DEFAULT_CODE, msg != null ? msg : DEFAULT_MESSAGE) { }
 }

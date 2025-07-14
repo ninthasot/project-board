@@ -120,4 +120,37 @@
   <data name="Internal_Server_Error_Title" xml:space="preserve">
     <value>Erreur interne du serveur</value>
   </data>
+  <data name="Internal_Server_Error_Detail" xml:space="preserve">
+    <value>Une erreur inattendue s'est produite sur le serveur. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="Service_Unavailable_Title" xml:space="preserve">
+    <value>Service indisponible</value>
+  </data>
+  <data name="Conflict_Title" xml:space="preserve">
+    <value>Conflit</value>
+  </data>
+  <data name="Conflict_Detail" xml:space="preserve">
+    <value>Un conflit est survenu lors du traitement de votre demande. Veuillez réessayer.</value>
+  </data>
+  <data name="Bad_Request_Title" xml:space="preserve">
+    <value>La requête est invalide</value>
+  </data>
+  <data name="Bad_Request_Detail" xml:space="preserve">
+    <value>La requête est invalide. Veuillez vérifier votre saisie et réessayer.</value>
+  </data>
+  <data name="Validation_Title" xml:space="preserve">
+    <value>Erreur(s) de validation</value>
+  </data>
+  <data name="Temporarily_Unavailable_Detail" xml:space="preserve">
+    <value>Le service est temporairement indisponible. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="Unexpected_Error_Detail" xml:space="preserve">
+    <value>Une erreur inattendue s'est produite. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="Database_Detail" xml:space="preserve">
+    <value>Une erreur de base de données s'est produite. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="Validation_Detail" xml:space="preserve">
+    <value>Une ou plusieurs erreurs de validation se sont produites.</value>
+  </data>
 </root>

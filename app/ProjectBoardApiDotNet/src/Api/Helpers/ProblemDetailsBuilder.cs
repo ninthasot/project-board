@@ -1,4 +1,4 @@
-﻿using Api.Constants;
+﻿using Api.Resources;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 using SharedKernel.Errors;
@@ -20,14 +20,14 @@ public static class ProblemDetailsBuilder
             IError ie => new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
-                Title = HttpConstant.ProblemTitleInternalServerError,
+                Title = HttpErrors.Internal_Server_Error_Title,
                 Detail = ie.Message,
             },
             _ => new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
-                Title = HttpConstant.ProblemTitleInternalServerError,
-                Detail = HttpConstant.ProblemDetailUnexpectedError,
+                Title = HttpErrors.Internal_Server_Error_Title,
+                Detail = HttpErrors.Unexpected_Error_Detail,
             },
         };
 
@@ -45,8 +45,8 @@ public static class ProblemDetailsBuilder
         var problemDetails = new ValidationProblemDetails
         {
             Status = StatusCodes.Status400BadRequest,
-            Title = HttpConstant.ProblemTitleValidation,
-            Detail = HttpConstant.ProblemDetailValidationError,
+            Title = HttpErrors.Validation_Title,
+            Detail = HttpErrors.Validation_Detail,
         };
         if (!string.IsNullOrWhiteSpace(traceId))
             problemDetails.Extensions["traceId"] = traceId;

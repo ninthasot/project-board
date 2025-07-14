@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Api {
+namespace Boards.Resources {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace Resources.Api {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class HttpError {
+    public class BoardValidators {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal HttpError() {
+        internal BoardValidators() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Api.HttpError", typeof(HttpError).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Boards.Resources.BoardValidators", typeof(BoardValidators).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Resources.Api {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,38 @@ namespace Resources.Api {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Internal Server Error.
+        ///   Looks up a localized string similar to Description must be at most 500 characters..
         /// </summary>
-        internal static string Internal_Server_Error_Title {
+        public static string CreateBoard_DescriptionMaxLength {
             get {
-                return ResourceManager.GetString("Internal_Server_Error_Title", resourceCulture);
+                return ResourceManager.GetString("CreateBoard_DescriptionMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description is required..
+        /// </summary>
+        public static string CreateBoard_DescriptionRequired {
+            get {
+                return ResourceManager.GetString("CreateBoard_DescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title must be at most 100 characters..
+        /// </summary>
+        public static string CreateBoard_TitleMaxLength {
+            get {
+                return ResourceManager.GetString("CreateBoard_TitleMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title is required..
+        /// </summary>
+        public static string CreateBoard_TitleRequired {
+            get {
+                return ResourceManager.GetString("CreateBoard_TitleRequired", resourceCulture);
             }
         }
     }

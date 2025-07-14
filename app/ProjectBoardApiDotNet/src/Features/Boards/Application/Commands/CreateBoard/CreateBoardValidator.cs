@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Boards.Resources;
+using FluentValidation;
 
 namespace Boards.Application.Commands.CreateBoard;
 
@@ -8,14 +9,14 @@ public class CreateBoardValidator : AbstractValidator<CreateBoardCommand>
     {
         RuleFor(x => x.Title)
             .NotEmpty()
-            .WithMessage("Title is required.")
+            .WithMessage(BoardValidators.CreateBoard_TitleRequired)
             .MaximumLength(200)
-            .WithMessage("Title must be at most 100 characters.");
+            .WithMessage(BoardValidators.CreateBoard_TitleMaxLength);
 
         RuleFor(x => x.Description)
             .NotEmpty()
-            .WithMessage("Description is required.")
+            .WithMessage(BoardValidators.CreateBoard_DescriptionRequired)
             .MaximumLength(1000)
-            .WithMessage("Description must be at most 500 characters.");
+            .WithMessage(BoardValidators.CreateBoard_DescriptionMaxLength);
     }
 }

@@ -12,5 +12,6 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="src\Resources\Api\HttpErrors.Designer.cs" />
   </ItemGroup>
 </Project>
