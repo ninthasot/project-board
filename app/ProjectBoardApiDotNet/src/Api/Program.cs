@@ -1,3 +1,5 @@
+using Boards.Infrastructure.Persistence.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure Serilog for structured logging

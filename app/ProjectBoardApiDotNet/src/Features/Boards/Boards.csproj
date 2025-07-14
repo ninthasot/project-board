@@ -26,7 +26,4 @@
       <LastGenOutput>BoardValidators.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Application\Abstractions\" />
-  </ItemGroup>
 </Project>

@@ -1,4 +1,12 @@
-﻿namespace Api.Extensions;
+﻿using Attachments.Infrastructure.Persistence;
+using Boards.Infrastructure.Persistence;
+using Cards.Infrastructure.Persistence;
+using CheckLists.Infrastructure.Persistence;
+using Comments.Infrastructure.Persistence;
+using Labels.Infrastructure.Persistence;
+using Users.Infrastructure.Persistence;
+
+namespace Api.Extensions;
 
 public static class DatabaseExtensions
 {

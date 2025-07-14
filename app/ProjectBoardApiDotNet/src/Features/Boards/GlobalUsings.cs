@@ -1,6 +1,6 @@
 ﻿global using Boards.Application.DTO;
 global using Boards.Domain.Abstractions;
-global using Boards.Infrastructure.Configurations;
+global using Boards.Infrastructure.Persistence.Configurations;
 global using Boards.Resources;
 global using FluentResults;
 global using FluentValidation;
