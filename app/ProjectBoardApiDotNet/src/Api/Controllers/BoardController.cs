@@ -1,4 +1,8 @@
-﻿namespace Api.Controllers;
+﻿using Boards.Application.Commands.CreateBoard;
+using Boards.Application.Dtos;
+using Boards.Application.Queries.GetBoardById;
+
+namespace Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

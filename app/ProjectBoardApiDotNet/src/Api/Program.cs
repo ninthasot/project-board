@@ -1,3 +1,4 @@
+using Boards.Domain.Abstractions;
 using Boards.Infrastructure.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
