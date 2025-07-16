@@ -1,7 +1,4 @@
-﻿using FluentResults;
-using SharedKernel.Errors;
-
-namespace Api.Helpers;
+﻿namespace Api.Helpers;
 
 public static class ProblemDetailsBuilder
 {

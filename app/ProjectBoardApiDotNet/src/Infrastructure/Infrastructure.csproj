@@ -1,5 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Messaging\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Messaging\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Messaging\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="FluentResults" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
@@ -7,9 +15,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Messaging\" />
   </ItemGroup>
 </Project>

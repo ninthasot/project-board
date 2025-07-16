@@ -1,102 +1,16 @@
-﻿using Attachments.Infrastructure.Persistence;
-using Cards.Infrastructure.Persistence;
-using CheckLists.Infrastructure.Persistence;
-using Comments.Infrastructure.Persistence;
-using Labels.Infrastructure.Persistence;
-using Users.Infrastructure.Persistence;
+﻿using Api.ExceptionHandlers;
+using Attachments.Infrastructure;
+using Boards.Infrastructure;
+using Cards.Infrastructure;
+using CheckLists.Infrastructure;
+using Comments.Infrastructure;
+using Labels.Infrastructure;
+using Users.Infrastructure;
 
 namespace Api.Extensions;
 
 internal static class WebApplicationBuilderExtensions
 {
-    public static WebApplicationBuilder AddDataBase(this WebApplicationBuilder builder)
-    {
-        builder.Services.AddDbContext<AttachmentDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Attachment
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<CardDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Card
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<CheckListDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.CheckList
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<CommentDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Comment
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<LabelDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Label
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<UserDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.User
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<ProjectIdentityDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Identity
-                    )
-            );
-        });
-        return builder;
-    }
-
     public static WebApplicationBuilder AddTelemetry(this WebApplicationBuilder builder)
     {
         var otlpEndpoint = builder.Configuration["OpenTelemetry:OtlpEndpoint"];
@@ -131,6 +45,28 @@ internal static class WebApplicationBuilderExtensions
                         options.Protocol = OpenTelemetry.Exporter.OtlpExportProtocol.HttpProtobuf;
                     });
             });
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddExceptionHandlers(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+        builder.Services.AddExceptionHandler<ServiceUnavailableExceptionHandler>();
+        builder.Services.AddExceptionHandler<BaseExceptionHandler>();
+        builder.Services.AddExceptionHandler<DbUpdateExceptionHandler>();
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddModuleServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AttachmentCardServices(builder.Configuration);
+        builder.Services.AddBoardServices(builder.Configuration);
+        builder.Services.AddCardServices(builder.Configuration);
+        builder.Services.CheckListCardServices(builder.Configuration);
+        builder.Services.CommentCardServices(builder.Configuration);
+        builder.Services.LabelCardServices(builder.Configuration);
+        builder.Services.UserCardServices(builder.Configuration);
         return builder;
     }
 }
