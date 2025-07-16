@@ -1,5 +1,4 @@
-using Boards.Domain.Abstractions;
-using Boards.Infrastructure.Persistence.Repositories;
+using Boards.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,7 @@ builder.AddDataBase();
 
 //builder.Services.AddFluentValidationAutoValidation();
 
-builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+builder.Services.AddBoardServices(builder.Configuration);
 
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 

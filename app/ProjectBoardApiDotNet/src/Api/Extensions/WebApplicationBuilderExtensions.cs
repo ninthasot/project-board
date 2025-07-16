@@ -1,5 +1,4 @@
 ﻿using Attachments.Infrastructure.Persistence;
-using Boards.Infrastructure.Persistence;
 using Cards.Infrastructure.Persistence;
 using CheckLists.Infrastructure.Persistence;
 using Comments.Infrastructure.Persistence;
@@ -20,18 +19,6 @@ internal static class WebApplicationBuilderExtensions
                     npgsqlOptions.MigrationsHistoryTable(
                         HistoryRepository.DefaultTableName,
                         DatabaseSchema.Attachment
-                    )
-            );
-        });
-
-        builder.Services.AddDbContext<BoardDbContext>(options =>
-        {
-            options.UseNpgsql(
-                builder.Configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Board
                     )
             );
         });

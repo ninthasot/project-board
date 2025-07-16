@@ -27,18 +27,11 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Attachments.Infrastructure\Attachments.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\Cards.Infrastructure\Cards.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\CheckLists.Infrastructure\CheckLists.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\Comments.Infrastructure\Comments.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\Labels.Infrastructure\Labels.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\..\Users.Infrastructure\Users.Infrastructure.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Identity\Identity.csproj" />
     <ProjectReference Include="..\Modules\Attachments\Attachments.Infrastructure\Attachments.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Boards\Boards.Application\Boards.Application.csproj" />
-    <ProjectReference Include="..\Modules\Boards\Boards.Intrastructure\Boards.Intrastructure.csproj" />
-    <ProjectReference Include="..\Modules\Boards\Boards.Domain\Boards.Domain.csproj" />
+    <ProjectReference Include="..\Modules\Boards\Boards.Infrastructure\Boards.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Cards\Cards.Infrastructure\Cards.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\CheckLists\CheckLists.Infrastructure\CheckLists.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Comments\Comments.Infrastructure\Comments.Infrastructure.csproj" />
