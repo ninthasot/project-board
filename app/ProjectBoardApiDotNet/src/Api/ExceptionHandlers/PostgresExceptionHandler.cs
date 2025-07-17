@@ -1,6 +1,6 @@
 ﻿namespace Api.ExceptionHandlers;
 
-internal class PostgresExceptionHandler : BaseExceptionHandler<PostgresException>
+internal sealed class PostgresExceptionHandler : BaseExceptionHandler<PostgresException>
 {
     public PostgresExceptionHandler(
         IProblemDetailsService problemDetailsService,

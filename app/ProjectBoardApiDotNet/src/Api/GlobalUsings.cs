@@ -21,3 +21,4 @@ global using Scalar.AspNetCore;
 global using Serilog;
 global using SharedKernel.Application.Behaviors;
 global using SharedKernel.Errors;
+global using Api.ExceptionHandlers.Base;

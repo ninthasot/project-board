@@ -1,4 +1,4 @@
-﻿namespace Api.ExceptionHandlers;
+﻿namespace Api.ExceptionHandlers.Base;
 
 internal abstract class BaseExceptionHandler<TException> : IExceptionHandler
     where TException : Exception
