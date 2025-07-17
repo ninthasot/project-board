@@ -51,7 +51,8 @@ internal static class WebApplicationBuilderExtensions
     public static WebApplicationBuilder AddExceptionHandlers(this WebApplicationBuilder builder)
     {
         builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
-        builder.Services.AddExceptionHandler<ServiceUnavailableExceptionHandler>();
+        builder.Services.AddExceptionHandler<TimeoutExceptionHandler>();
+        builder.Services.AddExceptionHandler<PostgresExceptionHandler>();
         builder.Services.AddExceptionHandler<DbUpdateExceptionHandler>();
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         return builder;

@@ -1,10 +1,10 @@
 ﻿namespace Api.ExceptionHandlers;
 
-internal sealed class ServiceUnavailableExceptionHandler : BaseExceptionHandler<Exception>
+internal sealed class TimeoutExceptionHandler : BaseExceptionHandler<TimeoutException>
 {
-    public ServiceUnavailableExceptionHandler(
+    public TimeoutExceptionHandler(
         IProblemDetailsService problemDetailsService,
-        ILogger<ServiceUnavailableExceptionHandler> logger
+        ILogger<TimeoutExceptionHandler> logger
     )
         : base(problemDetailsService, logger) { }
 

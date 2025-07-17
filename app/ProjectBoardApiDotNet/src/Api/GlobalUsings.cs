@@ -1,12 +1,10 @@
 global using System;
 global using System.Diagnostics;
 global using System.Security.Cryptography;
-global using System.Text.Json;
 global using Api.Constants;
 global using Api.Controllers.Base;
 global using Api.Extensions;
 global using Api.Helpers;
-global using Api.Middlewares;
 global using Api.Resources;
 global using FluentResults;
 global using FluentValidation;

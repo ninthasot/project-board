@@ -27,7 +27,7 @@ internal sealed class ValidationExceptionHandler : BaseExceptionHandler<Validati
         var errors = validationException
             .Errors.GroupBy(e => e.PropertyName)
             .ToDictionary(
-                g => g.Key, // Use original casing for property names
+                g => g.Key,
                 g => g.Select(e => e.ErrorMessage).ToArray()
             );
 
