@@ -52,7 +52,6 @@ internal static class WebApplicationBuilderExtensions
     {
         builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
         builder.Services.AddExceptionHandler<ServiceUnavailableExceptionHandler>();
-        builder.Services.AddExceptionHandler<BaseExceptionHandler>();
         builder.Services.AddExceptionHandler<DbUpdateExceptionHandler>();
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         return builder;
