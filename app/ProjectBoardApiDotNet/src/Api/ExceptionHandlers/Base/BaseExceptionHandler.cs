@@ -18,7 +18,6 @@ internal abstract class BaseExceptionHandler<TException> : IExceptionHandler
     protected abstract int StatusCode { get; }
     protected abstract string Title { get; }
     protected abstract string Detail { get; }
-
     protected virtual LogLevel LogLevel => LogLevel.Error;
 
     public virtual async ValueTask<bool> TryHandleAsync(
@@ -54,7 +53,6 @@ internal abstract class BaseExceptionHandler<TException> : IExceptionHandler
             Type = ProblemDetailsUriHelper.GetProblemTypeUri(StatusCode),
             Title = Title,
             Detail = Detail,
-            Extensions = { ["traceId"] = httpContext.TraceIdentifier },
         };
 
         return await ProblemDetailsService.TryWriteAsync(
