@@ -1,5 +1,5 @@
-﻿using Cards.Infrastructure.Persistence;
-using Boards.Infrastructure.Persistence;
+﻿using Boards.Infrastructure.Persistence;
+using Cards.Infrastructure.Persistence;
 using Labels.Infrastructure.Persistence;
 using Users.Infrastructure.Persistence;
 
