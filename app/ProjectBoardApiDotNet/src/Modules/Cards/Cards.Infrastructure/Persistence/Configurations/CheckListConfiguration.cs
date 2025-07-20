@@ -1,4 +1,4 @@
-namespace CheckLists.Infrastructure.Persistence.Configurations;
+namespace Cards.Infrastructure.Persistence.Configurations;
 
 public class CheckListConfiguration : IEntityTypeConfiguration<CheckList>
 {
@@ -16,6 +16,12 @@ public class CheckListConfiguration : IEntityTypeConfiguration<CheckList>
             .HasMany(c => c.Items)
             .WithOne(i => i.CheckList)
             .HasForeignKey(i => i.CheckListId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasOne(cl => cl.Card)
+            .WithMany(c => c.CheckLists)
+            .HasForeignKey(cl => cl.CardId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Index for fast lookup

@@ -29,12 +29,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Identity\Identity.csproj" />
-    <ProjectReference Include="..\Modules\Attachments\Attachments.Infrastructure\Attachments.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Boards\Boards.Application\Boards.Application.csproj" />
     <ProjectReference Include="..\Modules\Boards\Boards.Infrastructure\Boards.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Cards\Cards.Infrastructure\Cards.Infrastructure.csproj" />
-    <ProjectReference Include="..\Modules\CheckLists\CheckLists.Infrastructure\CheckLists.Infrastructure.csproj" />
-    <ProjectReference Include="..\Modules\Comments\Comments.Infrastructure\Comments.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Labels\Labels.Infrastructure\Labels.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Users\Users.Infrastructure\Users.Infrastructure.csproj" />
     <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />

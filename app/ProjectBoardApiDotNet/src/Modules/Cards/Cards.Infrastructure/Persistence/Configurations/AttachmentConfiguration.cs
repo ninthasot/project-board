@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Attachments.Infrastructure.Persistence.Configurations;
+﻿namespace Cards.Infrastructure.Persistence.Configurations;
 
 public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
 {
@@ -23,6 +21,12 @@ public class AttachmentConfiguration : IEntityTypeConfiguration<Attachment>
         builder.Property(a => a.UploadedAtUtc).IsRequired();
 
         builder.Property(a => a.UploadedBy).IsRequired();
+
+        builder
+            .HasOne(a => a.Card)
+            .WithMany(c => c.Attachments)
+            .HasForeignKey(a => a.CardId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         // Index for fast lookup
         builder.HasIndex(a => a.CardId);

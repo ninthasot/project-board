@@ -1,8 +1,5 @@
-﻿using Attachments.Infrastructure.Persistence;
+﻿using Cards.Infrastructure.Persistence;
 using Boards.Infrastructure.Persistence;
-using Cards.Infrastructure.Persistence;
-using CheckLists.Infrastructure.Persistence;
-using Comments.Infrastructure.Persistence;
 using Labels.Infrastructure.Persistence;
 using Users.Infrastructure.Persistence;
 
@@ -19,11 +16,8 @@ public static class DatabaseExtensions
 
         var dbContexts = new Type[]
         {
-            typeof(AttachmentDbContext),
-            typeof(BoardDbContext),
             typeof(CardDbContext),
-            typeof(CheckListDbContext),
-            typeof(CommentDbContext),
+            typeof(BoardDbContext),
             typeof(LabelDbContext),
             typeof(UserDbContext),
             typeof(ProjectIdentityDbContext),

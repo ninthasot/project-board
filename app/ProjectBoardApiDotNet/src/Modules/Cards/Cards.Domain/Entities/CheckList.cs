@@ -1,4 +1,4 @@
-﻿namespace CheckLists.Domain.Entities;
+﻿namespace Cards.Domain.Entities;
 
 public sealed class CheckList : BaseEntity<Guid>
 {
@@ -7,4 +7,5 @@ public sealed class CheckList : BaseEntity<Guid>
 
     // Navigation properties
     public ICollection<CheckListItem> Items { get; } = new List<CheckListItem>();
+    public Card? Card { get; set; }
 }

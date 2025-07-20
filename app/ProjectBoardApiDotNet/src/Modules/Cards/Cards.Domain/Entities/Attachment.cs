@@ -1,6 +1,4 @@
-﻿using SharedKernel.Entities;
-
-namespace Attachments.Domain.Entities;
+﻿namespace Cards.Domain.Entities;
 
 public class Attachment : BaseEntity<Guid>
 {
@@ -11,4 +9,7 @@ public class Attachment : BaseEntity<Guid>
     public long FileSize { get; set; }
     public DateTimeOffset UploadedAtUtc { get; set; }
     public Guid UploadedBy { get; set; }
+
+    // Navigation property
+    public Card? Card { get; set; }
 }

@@ -1,9 +1,6 @@
 ﻿using Api.ExceptionHandlers;
-using Attachments.Infrastructure;
 using Boards.Infrastructure;
 using Cards.Infrastructure;
-using CheckLists.Infrastructure;
-using Comments.Infrastructure;
 using Labels.Infrastructure;
 using Users.Infrastructure;
 
@@ -60,11 +57,8 @@ internal static class WebApplicationBuilderExtensions
 
     public static WebApplicationBuilder AddModuleServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AttachmentCardServices(builder.Configuration);
         builder.Services.AddBoardServices(builder.Configuration);
         builder.Services.AddCardServices(builder.Configuration);
-        builder.Services.CheckListCardServices(builder.Configuration);
-        builder.Services.CommentCardServices(builder.Configuration);
         builder.Services.LabelCardServices(builder.Configuration);
         builder.Services.UserCardServices(builder.Configuration);
         return builder;

@@ -1,4 +1,4 @@
-namespace CheckLists.Infrastructure.Persistence.Configurations;
+namespace Cards.Infrastructure.Persistence.Configurations;
 
 public class CheckListItemConfiguration : IEntityTypeConfiguration<CheckListItem>
 {

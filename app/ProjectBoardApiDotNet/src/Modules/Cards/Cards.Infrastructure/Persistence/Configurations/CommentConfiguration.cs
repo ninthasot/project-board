@@ -1,6 +1,4 @@
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Comments.Infrastructure.Persistence.Configurations;
+namespace Cards.Infrastructure.Persistence.Configurations;
 
 public class CommentConfiguration : IEntityTypeConfiguration<Comment>
 {
@@ -15,6 +13,12 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
         builder.Property(cm => cm.UserId).IsRequired();
 
         builder.Property(cm => cm.Content).IsRequired().HasMaxLength(2000);
+
+        builder
+            .HasOne(cm => cm.Card)
+            .WithMany(c => c.Comments)
+            .HasForeignKey(cm => cm.CardId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         // Indexes for fast lookup
         builder.HasIndex(cm => cm.CardId);

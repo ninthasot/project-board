@@ -1,4 +1,4 @@
-﻿namespace CheckLists.Domain.Entities;
+﻿namespace Cards.Domain.Entities;
 
 public sealed class CheckListItem : BaseEntity<Guid>
 {
