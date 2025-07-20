@@ -1,6 +1,5 @@
 ﻿using Boards.Application.Dtos;
-using Boards.Domain.Abstractions;
-using SharedKernel.Errors;
+using Boards.Domain;
 
 namespace Boards.Application.Queries.GetBoardById;
 
@@ -23,7 +22,7 @@ public sealed record GetBoardByIdQueryHandler : IRequestHandler<GetBoardByIdQuer
         var board = await _boardRepository.GetByIdAsync(request.Id, cancellationToken);
 
         if (board is null)
-            return Result.Fail(SharedErrorFactory.NotFound);
+            return Result.Fail(BoardErrors.NotFound());
 
         var dto = new BoardDto
         {

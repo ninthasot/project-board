@@ -1,6 +1,4 @@
-﻿using SharedKernel.Entities;
-
-namespace Boards.Domain.Entities;
+﻿namespace Boards.Domain.Entities;
 
 public sealed class Board : BaseAuditableEntity<Guid>
 {

@@ -1,8 +1,8 @@
 ﻿using Cards.Infrastructure.Persistence;
+using Common.Constants;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SharedKernel.Constants;
 
 namespace Cards.Infrastructure;
 

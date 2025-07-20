@@ -12,16 +12,7 @@ builder.Services.AddProblemDetails(options =>
     };
 });
 
-//builder.Services.AddFluentValidationAutoValidation();
-
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddMediatR(options =>
-{
-    options.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-});
+builder.Services.AddApplication([Boards.Application.AssemblyReference.Assembly]);
 
 builder.Services.AddControllers();
 

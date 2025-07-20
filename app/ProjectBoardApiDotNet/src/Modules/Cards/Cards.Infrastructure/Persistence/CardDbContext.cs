@@ -1,5 +1,5 @@
 ﻿using Cards.Infrastructure.Persistence.Configurations;
-using SharedKernel.Constants;
+using Common.Constants;
 
 namespace Cards.Infrastructure.Persistence;
 

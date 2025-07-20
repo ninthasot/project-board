@@ -1,8 +1,8 @@
-﻿using Labels.Infrastructure.Persistence;
+﻿using Common.Constants;
+using Labels.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SharedKernel.Constants;
 
 namespace Labels.Infrastructure;
 

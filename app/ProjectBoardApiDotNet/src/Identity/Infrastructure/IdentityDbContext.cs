@@ -1,7 +1,7 @@
-﻿using Identity.Entities;
+﻿using Common.Constants;
+using Identity.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SharedKernel.Constants;
 
 namespace Identity.Infrastructure;
 

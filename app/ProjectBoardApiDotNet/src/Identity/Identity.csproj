@@ -4,6 +4,6 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

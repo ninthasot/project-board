@@ -1,5 +1,5 @@
 ﻿using Boards.Infrastructure.Persistence.Configurations;
-using SharedKernel.Constants;
+using Common.Constants;
 
 namespace Boards.Infrastructure.Persistence;
 

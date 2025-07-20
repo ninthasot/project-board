@@ -27,14 +27,15 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Common\Common.Presentation\Common.Presentation.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Identity\Identity.csproj" />
-    <ProjectReference Include="..\Modules\Boards\Boards.Application\Boards.Application.csproj" />
     <ProjectReference Include="..\Modules\Boards\Boards.Infrastructure\Boards.Infrastructure.csproj" />
+    <ProjectReference Include="..\Modules\Boards\Boards.Presentation\Boards.Presentation.csproj" />
     <ProjectReference Include="..\Modules\Cards\Cards.Infrastructure\Cards.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Labels\Labels.Infrastructure\Labels.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Users\Users.Infrastructure\Users.Infrastructure.csproj" />
-    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Resources\HttpErrors.Designer.cs">

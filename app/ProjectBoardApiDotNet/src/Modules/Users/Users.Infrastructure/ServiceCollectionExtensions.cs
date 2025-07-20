@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Common.Constants;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SharedKernel.Constants;
 using Users.Infrastructure.Persistence;
 
 namespace Users.Infrastructure;

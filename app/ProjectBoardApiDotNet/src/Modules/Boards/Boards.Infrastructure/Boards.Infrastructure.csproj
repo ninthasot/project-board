@@ -4,7 +4,7 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
-    <ProjectReference Include="..\Boards.Domain\Boards.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Boards.Application\Boards.Application.csproj" />
   </ItemGroup>
 </Project>

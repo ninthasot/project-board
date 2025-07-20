@@ -17,7 +17,4 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
     <PackageReference Include="RabbitMQ.Client" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
-  </ItemGroup>
 </Project>

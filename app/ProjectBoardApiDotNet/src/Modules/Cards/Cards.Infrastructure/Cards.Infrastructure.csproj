@@ -4,8 +4,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Cards.Domain\Cards.Domain.csproj" />
-    <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\Migrations\" />

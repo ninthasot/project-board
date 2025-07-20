@@ -1,1 +1,1 @@
-﻿global using SharedKernel.Entities;
+﻿global using Common.Domain.Entities;

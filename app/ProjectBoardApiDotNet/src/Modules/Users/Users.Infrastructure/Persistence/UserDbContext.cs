@@ -1,4 +1,4 @@
-﻿using SharedKernel.Constants;
+﻿using Common.Constants;
 using Users.Infrastructure.Persistence.Configurations;
 
 namespace Users.Infrastructure.Persistence;

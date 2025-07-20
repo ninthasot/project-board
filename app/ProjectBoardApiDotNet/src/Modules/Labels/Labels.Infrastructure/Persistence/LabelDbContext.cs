@@ -1,6 +1,6 @@
-﻿using Labels.Domain.Entities;
+﻿using Common.Constants;
+using Labels.Domain.Entities;
 using Labels.Infrastructure.Persistence.Configurations;
-using SharedKernel.Constants;
 
 namespace Labels.Infrastructure.Persistence;
 

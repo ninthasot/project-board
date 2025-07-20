@@ -3,6 +3,11 @@
     <NeutralResourcesLanguage>en</NeutralResourcesLanguage>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Errors\BoardErrors.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BoardErrors.resx</DependentUpon>
+    </Compile>
     <Compile Update="Validators\BoardValidators.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -10,6 +15,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Errors\BoardErrors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BoardErrors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Validators\BoardValidators.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BoardValidators.Designer.cs</LastGenOutput>

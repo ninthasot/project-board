@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\Cards\Cards.Domain\Cards.Domain.csproj" />
-    <ProjectReference Include="..\..\..\SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.Domain\Common.Domain.csproj" />
+    <ProjectReference Include="..\Boards.Resources\Boards.Resources.csproj" />
   </ItemGroup>
 </Project>

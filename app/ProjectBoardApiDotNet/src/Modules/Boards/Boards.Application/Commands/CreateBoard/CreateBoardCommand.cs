@@ -1,3 +1,5 @@
-﻿namespace Boards.Application.Commands.CreateBoard;
+﻿using Common.Application.Messaging;
 
-public sealed record CreateBoardCommand(string Title, string Description) : IRequest<Result<Guid>>;
+namespace Boards.Application.Commands.CreateBoard;
+
+public sealed record CreateBoardCommand(string Title, string Description) : ICommand<Guid>;

@@ -1,9 +1,9 @@
-﻿using Boards.Domain.Abstractions;
-using Boards.Domain.Entities;
+﻿using Boards.Domain.Entities;
+using Common.Application.Messaging;
 
 namespace Boards.Application.Commands.CreateBoard;
 
-public sealed class CreateBoardCommandHandler : IRequestHandler<CreateBoardCommand, Result<Guid>>
+public sealed class CreateBoardCommandHandler : ICommandHandler<CreateBoardCommand, Guid>
 {
     private readonly IBoardRepository _boardRepository;
 
@@ -18,7 +18,7 @@ public sealed class CreateBoardCommandHandler : IRequestHandler<CreateBoardComma
     )
     {
         ArgumentNullException.ThrowIfNull(request);
-        // Validation, entity creation, etc.
+
         var board = new Board()
         {
             Id = Guid.NewGuid(),

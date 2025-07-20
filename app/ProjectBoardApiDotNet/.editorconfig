@@ -107,3 +107,4 @@ dotnet_diagnostic.CA2016.severity = suggestion
 dotnet_diagnostic.CA1055.severity = suggestion
 dotnet_style_predefined_type_for_locals_parameters_members = true:silent
 dotnet_diagnostic.CA1308.severity = suggestion
+dotnet_diagnostic.CA1040.severity = suggestion

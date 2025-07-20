@@ -1,10 +1,10 @@
 ﻿using Boards.Domain.Abstractions;
 using Boards.Infrastructure.Persistence;
 using Boards.Infrastructure.Persistence.Repositories;
+using Common.Constants;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SharedKernel.Constants;
 
 namespace Boards.Infrastructure;
 

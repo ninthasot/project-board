@@ -5,6 +5,7 @@
     <PackageReference Include="MediatR" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
     <ProjectReference Include="..\Boards.Domain\Boards.Domain.csproj" />
     <ProjectReference Include="..\Boards.Resources\Boards.Resources.csproj" />
   </ItemGroup>

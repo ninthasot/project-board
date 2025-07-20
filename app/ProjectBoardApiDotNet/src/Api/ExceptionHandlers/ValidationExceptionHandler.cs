@@ -1,4 +1,6 @@
-﻿namespace Api.ExceptionHandlers;
+﻿using Common.Presentation.Helpers;
+
+namespace Api.ExceptionHandlers;
 
 internal sealed class ValidationExceptionHandler : BaseExceptionHandler<ValidationException>
 {

@@ -1,4 +1,4 @@
-﻿using SharedKernel.Entities;
+﻿using Common.Domain.Entities;
 
 namespace Labels.Domain.Entities;
 
