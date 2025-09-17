@@ -13,7 +13,6 @@ internal sealed class ValidationExceptionHandler : BaseExceptionHandler<Validati
     protected override int StatusCode => StatusCodes.Status400BadRequest;
     protected override string Title => HttpErrors.Validation_Title;
     protected override string Detail => HttpErrors.Validation_Detail;
-    protected override LogLevel LogLevel => LogLevel.Warning;
 
     public override async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
@@ -24,7 +23,10 @@ internal sealed class ValidationExceptionHandler : BaseExceptionHandler<Validati
         if (exception is not ValidationException validationException)
             return false;
 
-        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+        if (validationException.Errors?.Any() != true)
+            return false;
+
+        httpContext.Response.StatusCode = StatusCode;
 
         var errors = validationException
             .Errors.GroupBy(e => e.PropertyName)
@@ -32,10 +34,10 @@ internal sealed class ValidationExceptionHandler : BaseExceptionHandler<Validati
 
         var validationProblemDetails = new ValidationProblemDetails(errors)
         {
-            Status = StatusCodes.Status400BadRequest,
-            Type = ProblemDetailsUriHelper.GetProblemTypeUri(StatusCodes.Status400BadRequest),
-            Title = HttpErrors.Validation_Title,
-            Detail = HttpErrors.Validation_Detail,
+            Status = StatusCode,
+            Type = ProblemDetailsUriHelper.GetProblemTypeUri(StatusCode),
+            Title = Title,
+            Detail = Detail,
         };
 
         return await ProblemDetailsService.TryWriteAsync(

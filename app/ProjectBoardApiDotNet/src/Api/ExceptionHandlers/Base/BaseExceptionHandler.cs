@@ -6,7 +6,7 @@ internal abstract class BaseExceptionHandler<TException> : IExceptionHandler
     where TException : Exception
 {
     protected readonly IProblemDetailsService ProblemDetailsService;
-    private readonly Microsoft.Extensions.Logging.ILogger _logger;
+    protected readonly Microsoft.Extensions.Logging.ILogger Logger;
 
     protected BaseExceptionHandler(
         IProblemDetailsService problemDetailsService,
@@ -14,7 +14,7 @@ internal abstract class BaseExceptionHandler<TException> : IExceptionHandler
     )
     {
         ProblemDetailsService = problemDetailsService;
-        _logger = logger;
+        Logger = logger;
     }
 
     protected abstract int StatusCode { get; }
@@ -31,7 +31,7 @@ internal abstract class BaseExceptionHandler<TException> : IExceptionHandler
         if (exception is not TException)
             return false;
 
-        _logger.Log(
+        Logger.Log(
             LogLevel,
             exception,
             LogMessageConstant.UnhandledException,
