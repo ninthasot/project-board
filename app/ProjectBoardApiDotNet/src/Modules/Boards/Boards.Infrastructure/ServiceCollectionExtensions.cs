@@ -1,6 +1,7 @@
 ﻿using Boards.Domain.Abstractions;
 using Boards.Infrastructure.Persistence;
 using Boards.Infrastructure.Persistence.Repositories;
+using Common.Application.Abstractions;
 using Common.Constants;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -17,15 +18,22 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<BoardDbContext>(options =>
         {
-            options.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Board
-                    )
-            );
+            options
+                .UseNpgsql(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions =>
+                        npgsqlOptions.MigrationsHistoryTable(
+                            HistoryRepository.DefaultTableName,
+                            DatabaseSchema.Board
+                        )
+                )
+                .EnableServiceProviderCaching()
+                .EnableSensitiveDataLogging(false);
         });
+
+        services.AddScoped<IBoardsUnitOfWork>(provider =>
+            provider.GetRequiredService<BoardDbContext>()
+        );
 
         services.AddScoped<IBoardRepository, BoardRepository>();
 

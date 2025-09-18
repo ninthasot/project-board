@@ -1,4 +1,5 @@
 ﻿using Boards.Domain.Entities;
+using Common.Application.Abstractions;
 using Common.Application.Messaging;
 
 namespace Boards.Application.Commands.CreateBoard;
@@ -6,10 +7,12 @@ namespace Boards.Application.Commands.CreateBoard;
 public sealed class CreateBoardCommandHandler : ICommandHandler<CreateBoardCommand, Guid>
 {
     private readonly IBoardRepository _boardRepository;
+    private readonly IBoardsUnitOfWork _boardsUnitOfWork; // Module-specific!
 
-    public CreateBoardCommandHandler(IBoardRepository boardRepository)
+    public CreateBoardCommandHandler(IBoardRepository boardRepository, IBoardsUnitOfWork unitOfWork)
     {
         _boardRepository = boardRepository;
+        _boardsUnitOfWork = unitOfWork;
     }
 
     public async Task<Result<Guid>> Handle(
@@ -22,10 +25,11 @@ public sealed class CreateBoardCommandHandler : ICommandHandler<CreateBoardComma
         var board = Board.Create(
             request.Title,
             request.Description,
-            request.CreatedBy
+            string.Empty // TODO: Replace with actual user ID
         );
 
         await _boardRepository.AddAsync(board, cancellationToken);
+        await _boardsUnitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Ok(board.Id);
     }

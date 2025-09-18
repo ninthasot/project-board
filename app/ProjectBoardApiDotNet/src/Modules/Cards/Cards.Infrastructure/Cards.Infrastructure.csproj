@@ -7,7 +7,4 @@
     <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
     <ProjectReference Include="..\Cards.Domain\Cards.Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Persistence\Migrations\" />
-  </ItemGroup>
 </Project>

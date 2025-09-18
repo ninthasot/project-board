@@ -29,7 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.Application\Common.Application.csproj" />
     <ProjectReference Include="..\Common\Common.Presentation\Common.Presentation.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\Identity\Identity.csproj" />
     <ProjectReference Include="..\Modules\Boards\Boards.Infrastructure\Boards.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules\Boards\Boards.Presentation\Boards.Presentation.csproj" />

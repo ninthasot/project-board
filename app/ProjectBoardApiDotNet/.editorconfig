@@ -30,6 +30,7 @@ csharp_prefer_static_local_function = true:suggestion
 csharp_style_conditional_delegate_call = true:suggestion
 csharp_style_pattern_matching_over_is_with_cast_check = true:suggestion
 dotnet_diagnostic.CA1812.severity = suggestion
+dotnet_diagnostic.S1135.severity = suggestion
 
 [*.{cs,vb}]
 #### Naming styles ####
@@ -109,3 +110,4 @@ dotnet_style_predefined_type_for_locals_parameters_members = true:silent
 dotnet_diagnostic.CA1308.severity = suggestion
 dotnet_diagnostic.CA1040.severity = suggestion
 dotnet_diagnostic.CA1030.severity = suggestion
+dotnet_diagnostic.CA1711.severity = suggestion

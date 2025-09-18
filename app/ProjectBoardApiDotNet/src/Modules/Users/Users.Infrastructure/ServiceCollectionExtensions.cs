@@ -1,4 +1,5 @@
-﻿using Common.Constants;
+﻿using Common.Application.Abstractions;
+using Common.Constants;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,15 +16,22 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<UserDbContext>(options =>
         {
-            options.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.User
-                    )
-            );
+            options
+                .UseNpgsql(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions =>
+                        npgsqlOptions.MigrationsHistoryTable(
+                            HistoryRepository.DefaultTableName,
+                            DatabaseSchema.User
+                        )
+                )
+                .EnableServiceProviderCaching()
+                .EnableServiceProviderCaching(false);
         });
+
+        services.AddScoped<IUsersUnitOfWork>(provider =>
+            provider.GetRequiredService<UserDbContext>()
+        );
 
         return services;
     }

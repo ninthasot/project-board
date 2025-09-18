@@ -1,1 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk"></Project>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Application\Common.Application.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,4 +1,5 @@
-﻿using Common.Constants;
+﻿using Common.Application.Abstractions;
+using Common.Constants;
 using Labels.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -15,15 +16,22 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<LabelDbContext>(options =>
         {
-            options.UseNpgsql(
-                configuration.GetConnectionString("DefaultConnection"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(
-                        HistoryRepository.DefaultTableName,
-                        DatabaseSchema.Label
-                    )
-            );
+            options
+                .UseNpgsql(
+                    configuration.GetConnectionString("DefaultConnection"),
+                    npgsqlOptions =>
+                        npgsqlOptions.MigrationsHistoryTable(
+                            HistoryRepository.DefaultTableName,
+                            DatabaseSchema.Label
+                        )
+                )
+                .EnableServiceProviderCaching()
+                .EnableSensitiveDataLogging(false);
         });
+
+        services.AddScoped<ILabelsUnitOfWork>(provider =>
+            provider.GetRequiredService<LabelDbContext>()
+        );
 
         return services;
     }

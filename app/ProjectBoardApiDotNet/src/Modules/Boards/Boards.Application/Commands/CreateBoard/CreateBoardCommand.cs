@@ -3,4 +3,4 @@ using Common.Domain.Events;
 
 namespace Boards.Application.Commands.CreateBoard;
 
-public sealed record CreateBoardCommand(string Title, string Description, string CreatedBy) : ICommand<Guid>;
+public sealed record CreateBoardCommand(string Title, string Description) : ICommand<Guid>;

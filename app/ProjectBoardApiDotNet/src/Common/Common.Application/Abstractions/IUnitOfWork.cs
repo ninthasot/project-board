@@ -7,3 +7,11 @@ public interface IUnitOfWork
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
     Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
 }
+
+public interface IBoardsUnitOfWork : IUnitOfWork;
+
+public interface ICardsUnitOfWork : IUnitOfWork;
+
+public interface ILabelsUnitOfWork : IUnitOfWork;
+
+public interface IUsersUnitOfWork : IUnitOfWork;

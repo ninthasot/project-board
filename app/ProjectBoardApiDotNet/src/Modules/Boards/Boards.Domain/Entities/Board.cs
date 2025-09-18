@@ -12,8 +12,7 @@ public sealed class Board : AggregateRoot<Guid>
 
     public ICollection<BoardMember> BoardMembers { get; } = [];
 
-    private Board()
-    { }
+    private Board() { }
 
     public static Board Create(string title, string description, string createdBy)
     {
@@ -25,7 +24,7 @@ public sealed class Board : AggregateRoot<Guid>
             CreatedAtUtc = DateTimeOffset.UtcNow,
             UpdatedAtUtc = DateTimeOffset.UtcNow,
             CreatedBy = createdBy,
-            UpdatedBy = createdBy
+            UpdatedBy = createdBy,
         };
         board.RaiseDomainEvent(new BoardCreatedEvent(board.Id, title, description, createdBy));
         return board;
@@ -51,7 +50,7 @@ public sealed class Board : AggregateRoot<Guid>
             CreatedAtUtc = DateTimeOffset.UtcNow,
             UpdatedAtUtc = DateTimeOffset.UtcNow,
             CreatedBy = createdBy,
-            UpdatedBy = createdBy
+            UpdatedBy = createdBy,
         };
         Columns.Add(column);
         RaiseDomainEvent(new ColumnAddedToBoardEvent(Id, column.Id, title, position));
