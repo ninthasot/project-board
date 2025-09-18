@@ -20,9 +20,9 @@ public sealed class BoardRepository : IBoardRepository
         return response;
     }
 
-    public Task<Board> AddAsync(Board entity, CancellationToken cancellationToken = default)
+    public async Task<Board> AddAsync(Board entity, CancellationToken cancellationToken = default)
     {
-        _context.Boards.Add(entity);
-        return Task.FromResult(entity);
+        await _context.Boards.AddAsync(entity, cancellationToken);
+        return entity;
     }
 }
