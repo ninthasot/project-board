@@ -4,16 +4,18 @@ namespace Boards.Domain.Entities;
 
 public sealed class Board : AggregateRoot<Guid>
 {
-    public required string Title { get; private set; }
-    public required string Description { get; private set; }
+    public string Title { get; private set; } = string.Empty;
+    public string Description { get; private set; } = string.Empty;
 
     // Navigation properties
     public ICollection<Column> Columns { get; } = [];
+
     public ICollection<BoardMember> BoardMembers { get; } = [];
 
-    private Board() { }
+    private Board()
+    { }
 
-    public static Board Create(string title, string description, Guid createdBy)
+    public static Board Create(string title, string description, string createdBy)
     {
         var board = new Board
         {
@@ -22,20 +24,23 @@ public sealed class Board : AggregateRoot<Guid>
             Description = description,
             CreatedAtUtc = DateTimeOffset.UtcNow,
             UpdatedAtUtc = DateTimeOffset.UtcNow,
+            CreatedBy = createdBy,
+            UpdatedBy = createdBy
         };
         board.RaiseDomainEvent(new BoardCreatedEvent(board.Id, title, description, createdBy));
         return board;
     }
 
-    public void UpdateDetails(string title, string description, Guid updatedBy)
+    public void UpdateDetails(string title, string description, string updatedBy)
     {
         Title = title;
         Description = description;
         UpdatedAtUtc = DateTimeOffset.UtcNow;
+        UpdatedBy = updatedBy;
         RaiseDomainEvent(new BoardUpdatedEvent(Id, title, description, updatedBy));
     }
 
-    public Column AddColumn(string title, int position, Guid createdBy)
+    public Column AddColumn(string title, int position, string createdBy)
     {
         var column = new Column
         {
@@ -45,6 +50,8 @@ public sealed class Board : AggregateRoot<Guid>
             Position = position,
             CreatedAtUtc = DateTimeOffset.UtcNow,
             UpdatedAtUtc = DateTimeOffset.UtcNow,
+            CreatedBy = createdBy,
+            UpdatedBy = createdBy
         };
         Columns.Add(column);
         RaiseDomainEvent(new ColumnAddedToBoardEvent(Id, column.Id, title, position));

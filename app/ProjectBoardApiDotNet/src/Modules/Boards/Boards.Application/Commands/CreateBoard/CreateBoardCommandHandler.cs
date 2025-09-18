@@ -19,13 +19,11 @@ public sealed class CreateBoardCommandHandler : ICommandHandler<CreateBoardComma
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        var board = new Board()
-        {
-            Id = Guid.NewGuid(),
-            Title = request.Title,
-            Description = request.Description,
-            CreatedAtUtc = DateTimeOffset.UtcNow,
-        };
+        var board = Board.Create(
+            request.Title,
+            request.Description,
+            request.CreatedBy
+        );
 
         await _boardRepository.AddAsync(board, cancellationToken);
 

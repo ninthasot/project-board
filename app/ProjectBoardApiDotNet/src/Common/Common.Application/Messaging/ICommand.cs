@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace Common.Domain.Events;
+namespace Common.Application.Messaging;
 
 public interface ICommand<TResponse> : IRequest<Result<TResponse>>, IBaseCommand;
 

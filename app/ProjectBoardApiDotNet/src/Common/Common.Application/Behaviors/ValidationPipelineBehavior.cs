@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Common.Application.Messaging;
 using Common.Domain.Errors;
+using Common.Domain.Events;
 using FluentResults;
 using FluentValidation;
 using FluentValidation.Results;

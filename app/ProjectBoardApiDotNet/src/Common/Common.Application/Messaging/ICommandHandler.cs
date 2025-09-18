@@ -1,4 +1,5 @@
-﻿using FluentResults;
+﻿using Common.Domain.Events;
+using FluentResults;
 using MediatR;
 
 namespace Common.Application.Messaging;

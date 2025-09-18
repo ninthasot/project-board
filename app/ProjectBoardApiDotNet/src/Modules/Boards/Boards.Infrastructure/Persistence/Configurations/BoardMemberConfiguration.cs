@@ -1,8 +1,8 @@
 ﻿namespace Boards.Infrastructure.Persistence.Configurations;
 
-public class BoardMemberConfiguration : IEntityTypeConfiguration<BoardCreatedEvent>
+public class BoardMemberConfiguration : IEntityTypeConfiguration<BoardMember>
 {
-    public void Configure(EntityTypeBuilder<BoardCreatedEvent> builder)
+    public void Configure(EntityTypeBuilder<BoardMember> builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
 

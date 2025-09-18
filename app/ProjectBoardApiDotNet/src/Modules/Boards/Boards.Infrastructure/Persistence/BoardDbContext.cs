@@ -6,7 +6,7 @@ namespace Boards.Infrastructure.Persistence;
 public class BoardDbContext(DbContextOptions<BoardDbContext> options) : DbContext(options)
 {
     public DbSet<Board> Boards { get; set; }
-    public DbSet<BoardCreatedEvent> BoardMembers { get; set; }
+    public DbSet<BoardMember> BoardMembers { get; set; }
     public DbSet<Column> Columns { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
