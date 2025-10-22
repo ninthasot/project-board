@@ -1,6 +1,8 @@
-﻿using Cards.Infrastructure.Persistence;
+﻿using System;
+using Cards.Infrastructure.Persistence;
 using Common.Application.Abstractions;
 using Common.Constants;
+using Common.Infrastructure.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,20 +16,26 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration
     )
     {
-        services.AddDbContext<CardDbContext>(options =>
-        {
-            options
-                .UseNpgsql(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    npgsqlOptions =>
-                        npgsqlOptions.MigrationsHistoryTable(
-                            HistoryRepository.DefaultTableName,
-                            DatabaseSchema.Card
-                        )
-                )
-                .EnableServiceProviderCaching()
-                .EnableSensitiveDataLogging(false);
-        });
+        services.AddDbContext<CardDbContext>(
+            (serviceProvider, options) =>
+            {
+                var interceptor =
+                    serviceProvider.GetRequiredService<DomainEventDispatcherInterceptor>();
+
+                options
+                    .UseNpgsql(
+                        configuration.GetConnectionString("DefaultConnection"),
+                        npgsqlOptions =>
+                            npgsqlOptions.MigrationsHistoryTable(
+                                HistoryRepository.DefaultTableName,
+                                DatabaseSchema.Card
+                            )
+                    )
+                    .AddInterceptors(interceptor)
+                    .EnableServiceProviderCaching()
+                    .EnableSensitiveDataLogging(false);
+            }
+        );
 
         services.AddScoped<ICardsUnitOfWork>(provider =>
             provider.GetRequiredService<CardDbContext>()

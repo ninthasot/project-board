@@ -1,8 +1,12 @@
+using Common.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((ctx, lc) => lc.ReadFrom.Configuration(ctx.Configuration));
 
 builder.AddTelemetry().AddExceptionHandlers().AddModuleServices();
+
+builder.Services.AddCommonInfrastructure();
 
 builder.Services.AddProblemDetails(options =>
 {
@@ -12,7 +16,9 @@ builder.Services.AddProblemDetails(options =>
     };
 });
 
-builder.Services.AddApplication([Boards.Application.AssemblyReference.Assembly]);
+builder.Services.AddApplication(
+    [Boards.Application.AssemblyReference.Assembly, Labels.Application.AssemblyReference.Assembly]
+);
 
 builder.Services.AddControllers();
 
@@ -22,7 +28,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    //await app.ApplyMigrationAsync();
+    await app.ApplyMigrationAsync();
     app.MapOpenApi();
     app.MapScalarApiReference();
 }

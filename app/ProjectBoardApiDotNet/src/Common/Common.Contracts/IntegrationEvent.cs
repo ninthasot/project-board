@@ -1,6 +1,4 @@
-﻿using Common.Application.Abstractions;
-
-namespace Common.Application.Events;
+﻿namespace Common.Contracts;
 
 public abstract record IntegrationEvent : IIntegrationEvent
 {
@@ -11,11 +9,5 @@ public abstract record IntegrationEvent : IIntegrationEvent
     {
         EventId = Guid.NewGuid();
         OccurredOn = DateTimeOffset.UtcNow;
-    }
-
-    protected IntegrationEvent(Guid eventId, DateTimeOffset occurredOn)
-    {
-        EventId = eventId;
-        OccurredOn = occurredOn;
     }
 }

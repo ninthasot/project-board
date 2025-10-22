@@ -7,7 +7,7 @@ namespace Boards.Application.Commands.CreateBoard;
 public sealed class CreateBoardCommandHandler : ICommandHandler<CreateBoardCommand, Guid>
 {
     private readonly IBoardRepository _boardRepository;
-    private readonly IBoardsUnitOfWork _boardsUnitOfWork; // Module-specific!
+    private readonly IBoardsUnitOfWork _boardsUnitOfWork;
 
     public CreateBoardCommandHandler(IBoardRepository boardRepository, IBoardsUnitOfWork unitOfWork)
     {

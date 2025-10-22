@@ -2,7 +2,7 @@
 
 namespace Common.Domain.Events;
 
-public abstract record DomainEvent(Guid Id, DateTimeOffset OccurredOn) : IDomainEvent
+public abstract record DomainEvent(Guid Id, DateTimeOffset OccurredOnUtc) : IDomainEvent
 {
     protected DomainEvent()
         : this(Guid.NewGuid(), DateTimeOffset.UtcNow) { }

@@ -26,7 +26,9 @@ public sealed class Board : AggregateRoot<Guid>
             CreatedBy = createdBy,
             UpdatedBy = createdBy,
         };
-        board.RaiseDomainEvent(new BoardCreatedEvent(board.Id, title, description, createdBy));
+        board.RaiseDomainEvent(
+            new BoardCreatedDomainEvent(board.Id, title, description, createdBy)
+        );
         return board;
     }
 
@@ -36,7 +38,7 @@ public sealed class Board : AggregateRoot<Guid>
         Description = description;
         UpdatedAtUtc = DateTimeOffset.UtcNow;
         UpdatedBy = updatedBy;
-        RaiseDomainEvent(new BoardUpdatedEvent(Id, title, description, updatedBy));
+        RaiseDomainEvent(new BoardUpdatedDomainEvent(Id, title, description, updatedBy));
     }
 
     public Column AddColumn(string title, int position, string createdBy)
@@ -53,7 +55,7 @@ public sealed class Board : AggregateRoot<Guid>
             UpdatedBy = createdBy,
         };
         Columns.Add(column);
-        RaiseDomainEvent(new ColumnAddedToBoardEvent(Id, column.Id, title, position));
+        RaiseDomainEvent(new ColumnAddedToBoardDomainEvent(Id, column.Id, title, position));
         return column;
     }
 
@@ -72,6 +74,6 @@ public sealed class Board : AggregateRoot<Guid>
             JoinedAtUtc = DateTimeOffset.UtcNow,
         };
         BoardMembers.Add(boardMember);
-        RaiseDomainEvent(new BoardMemberAddedEvent(Id, userId, role));
+        RaiseDomainEvent(new BoardMemberAddedDomainEvent(Id, userId, role));
     }
 }

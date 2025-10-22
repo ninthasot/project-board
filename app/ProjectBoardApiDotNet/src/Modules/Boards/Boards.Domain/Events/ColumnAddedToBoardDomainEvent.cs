@@ -1,6 +1,6 @@
 ﻿namespace Boards.Domain.Events;
 
-public sealed record ColumnAddedToBoardEvent(
+public sealed record ColumnAddedToBoardDomainEvent(
     Guid BoardId,
     Guid ColumnId,
     string ColumnTitle,

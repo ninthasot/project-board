@@ -1,4 +1,6 @@
 ﻿using Common.Application.Abstractions;
+using Common.Application.Events;
+using Common.Contracts;
 using MediatR;
 
 namespace Common.Infrastructure.MessageBus;
@@ -18,8 +20,7 @@ internal sealed class InMemoryMessageBus : IMessageBus
     )
         where TIntegrationEvent : IIntegrationEvent
     {
-        // In a modular monolith, we can use MediatR to publish integration events
-        // as INotification across modules
-        await _publisher.Publish(integrationEvent, cancellationToken);
+        var notification = new IntegrationEventNotification<TIntegrationEvent>(integrationEvent);
+        await _publisher.Publish(notification, cancellationToken);
     }
 }

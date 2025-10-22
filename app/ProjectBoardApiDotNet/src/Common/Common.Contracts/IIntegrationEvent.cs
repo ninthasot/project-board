@@ -1,4 +1,4 @@
-﻿namespace Common.Application.Abstractions;
+﻿namespace Common.Contracts;
 
 public interface IIntegrationEvent
 {

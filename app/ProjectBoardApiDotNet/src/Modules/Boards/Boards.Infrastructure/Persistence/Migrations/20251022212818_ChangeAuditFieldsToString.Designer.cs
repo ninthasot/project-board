@@ -3,17 +3,20 @@ using System;
 using Boards.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Boards.Infrastructure.Migrations
+namespace Boards.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(BoardDbContext))]
-    partial class BoardDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251022212818_ChangeAuditFieldsToString")]
+    partial class ChangeAuditFieldsToString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

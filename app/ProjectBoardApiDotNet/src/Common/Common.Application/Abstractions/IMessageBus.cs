@@ -1,4 +1,6 @@
-﻿namespace Common.Application.Abstractions;
+﻿using Common.Contracts;
+
+namespace Common.Application.Abstractions;
 
 public interface IMessageBus
 {

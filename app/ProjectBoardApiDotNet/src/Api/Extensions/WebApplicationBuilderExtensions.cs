@@ -59,8 +59,8 @@ internal static class WebApplicationBuilderExtensions
     {
         builder.Services.AddBoardServices(builder.Configuration);
         builder.Services.AddCardServices(builder.Configuration);
-        builder.Services.LabelCardServices(builder.Configuration);
-        builder.Services.UserCardServices(builder.Configuration);
+        builder.Services.AddLabelServices(builder.Configuration);
+        builder.Services.AddUserServices(builder.Configuration);
         return builder;
     }
 }

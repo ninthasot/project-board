@@ -2,9 +2,9 @@
 
 namespace Boards.Domain.Events;
 
-public sealed record BoardUpdatedEvent(
+public sealed record BoardCreatedDomainEvent(
     Guid BoardId,
     string Title,
     string Description,
-    string UpdatedBy
+    string CreatedBy
 ) : DomainEvent;

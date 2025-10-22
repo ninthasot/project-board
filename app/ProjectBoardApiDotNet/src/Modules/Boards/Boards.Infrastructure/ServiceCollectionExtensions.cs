@@ -3,6 +3,7 @@ using Boards.Infrastructure.Persistence;
 using Boards.Infrastructure.Persistence.Repositories;
 using Common.Application.Abstractions;
 using Common.Constants;
+using Common.Infrastructure.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,20 +17,26 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration
     )
     {
-        services.AddDbContext<BoardDbContext>(options =>
-        {
-            options
-                .UseNpgsql(
-                    configuration.GetConnectionString("DefaultConnection"),
-                    npgsqlOptions =>
-                        npgsqlOptions.MigrationsHistoryTable(
-                            HistoryRepository.DefaultTableName,
-                            DatabaseSchema.Board
-                        )
-                )
-                .EnableServiceProviderCaching()
-                .EnableSensitiveDataLogging(false);
-        });
+        services.AddDbContext<BoardDbContext>(
+            (serviceProvider, options) =>
+            {
+                var interceptor =
+                    serviceProvider.GetRequiredService<DomainEventDispatcherInterceptor>();
+
+                options
+                    .UseNpgsql(
+                        configuration.GetConnectionString("DefaultConnection"),
+                        npgsqlOptions =>
+                            npgsqlOptions.MigrationsHistoryTable(
+                                HistoryRepository.DefaultTableName,
+                                DatabaseSchema.Board
+                            )
+                    )
+                    .AddInterceptors(interceptor)
+                    .EnableServiceProviderCaching()
+                    .EnableSensitiveDataLogging(false);
+            }
+        );
 
         services.AddScoped<IBoardsUnitOfWork>(provider =>
             provider.GetRequiredService<BoardDbContext>()
