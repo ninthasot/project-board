@@ -11,8 +11,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<DomainEventDispatcherInterceptor>();
 
-        services.AddSingleton<DomainEventDispatcherInterceptor>();
-
         services.AddScoped<IMessageBus, InMemoryMessageBus>();
 
         return services;
