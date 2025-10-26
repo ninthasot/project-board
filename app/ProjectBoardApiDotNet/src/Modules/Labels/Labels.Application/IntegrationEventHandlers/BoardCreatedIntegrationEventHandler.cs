@@ -112,9 +112,6 @@ internal sealed class BoardCreatedIntegrationEventHandler
     {
         var now = DateTimeOffset.UtcNow;
 
-        // ACL: Convert CreatedBy string to Guid (handle different formats from Boards module)
-        var creatorId = ParseCreatorId(notification.CreatedBy);
-
         // Map templates to domain entities
         return DefaultLabelDefinitions
             .Templates.Select(template => new Label
@@ -124,21 +121,9 @@ internal sealed class BoardCreatedIntegrationEventHandler
                 Name = template.Name,
                 HexColor = template.HexColor,
                 CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
+                CreatedBy = notification.CreatedBy ?? string.Empty,
             })
             .ToList();
-    }
-
-    /// <summary>
-    /// ACL: Safely parse CreatedBy from external module (could be string, GUID, email, etc.)
-    /// Protects Labels module from changes in Boards module's user identification format.
-    /// </summary>
-    private static Guid ParseCreatorId(string createdBy)
-    {
-        if (string.IsNullOrWhiteSpace(createdBy))
-            return Guid.Empty;
-
-        return Guid.TryParse(createdBy, out var guid) ? guid : Guid.Empty;
     }
 
     /// <summary>
