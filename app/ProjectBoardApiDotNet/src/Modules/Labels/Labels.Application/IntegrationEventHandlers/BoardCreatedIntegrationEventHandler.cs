@@ -1,9 +1,11 @@
 ﻿using Common.Application.Abstractions;
 using Common.Application.Events;
 using Common.Contracts.Events.Boards;
+using Labels.Application.Defaults;
 using Labels.Domain.Abstractions;
 using Labels.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Labels.Application.IntegrationEventHandlers;
@@ -31,6 +33,10 @@ internal sealed class BoardCreatedIntegrationEventHandler
         CancellationToken cancellationToken
     )
     {
+        ArgumentNullException.ThrowIfNull(notification);
+
+        ArgumentNullException.ThrowIfNull(notification.Event);
+
         var evt = notification.Event;
 
         _logger.LogInformation(
@@ -38,41 +44,64 @@ internal sealed class BoardCreatedIntegrationEventHandler
             evt.BoardId
         );
 
-        // ACL: Validate incoming data from external module
-        if (evt.BoardId == Guid.Empty)
+        try
         {
-            _logger.LogWarning("Received invalid BoardId. Skipping default label creation.");
-            return;
-        }
+            // ACL: Validate incoming data from external module
+            if (evt.BoardId == Guid.Empty)
+            {
+                _logger.LogWarning("Received invalid BoardId. Skipping default label creation.");
+                return;
+            }
 
-        // ACL: Check for idempotency - prevent duplicate label creation
-        var existingLabels = await _labelRepository.GetByBoardIdAsync(
-            evt.BoardId,
-            cancellationToken
-        );
-
-        if (existingLabels.Count > 0)
-        {
-            _logger.LogWarning(
-                "Board {BoardId} already has {Count} labels. Skipping default label creation.",
+            // ACL: Check for idempotency - prevent duplicate label creation
+            var existingLabels = await _labelRepository.GetByBoardIdAsync(
                 evt.BoardId,
-                existingLabels.Count
+                cancellationToken
             );
-            return;
+
+            if (existingLabels.Count > 0)
+            {
+                _logger.LogWarning(
+                    "Board {BoardId} already has {Count} labels. Skipping default label creation.",
+                    evt.BoardId,
+                    existingLabels.Count
+                );
+                return;
+            }
+
+            // ACL: Transform integration event into Labels module's domain model
+            var defaultLabels = CreateDefaultLabels(evt);
+
+            await _labelRepository.AddRangeAsync(defaultLabels, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            _logger.LogInformation(
+                "Created {Count} default labels for Board {BoardId}: '{BoardTitle}'",
+                defaultLabels.Count,
+                evt.BoardId,
+                evt.Title
+            );
         }
-
-        // ACL: Transform integration event into Labels module's domain model
-        var defaultLabels = CreateDefaultLabels(evt);
-
-        await _labelRepository.AddRangeAsync(defaultLabels, cancellationToken);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        _logger.LogInformation(
-            "Created {Count} default labels for Board {BoardId}: '{BoardTitle}'",
-            defaultLabels.Count,
-            evt.BoardId,
-            evt.Title
-        );
+        catch (OperationCanceledException)
+        {
+            throw;
+        }
+        catch (DbUpdateException ex) when (IsDuplicateKeyViolation(ex))
+        {
+            _logger.LogInformation(
+                ex,
+                "Default labels for Board {BoardId} were already created by another handler instance. Idempotency achieved via database constraint.",
+                evt.BoardId
+            );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Failed to create default labels for Board {BoardId}. Board will exist without default labels.",
+                evt.BoardId
+            );
+        }
     }
 
     /// <summary>
@@ -86,80 +115,18 @@ internal sealed class BoardCreatedIntegrationEventHandler
         // ACL: Convert CreatedBy string to Guid (handle different formats from Boards module)
         var creatorId = ParseCreatorId(notification.CreatedBy);
 
-        // Labels module's business rule: Create these specific default labels
-        return
-        [
-            new Label
+        // Map templates to domain entities
+        return DefaultLabelDefinitions
+            .Templates.Select(template => new Label
             {
                 Id = Guid.NewGuid(),
                 BoardId = notification.BoardId,
-                Name = "Priority: High",
-                HexColor = "#D32F2F", // Red
+                Name = template.Name,
+                HexColor = template.HexColor,
                 CreatedAtUtc = now,
                 CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-            new Label
-            {
-                Id = Guid.NewGuid(),
-                BoardId = notification.BoardId,
-                Name = "Priority: Medium",
-                HexColor = "#FF9800", // Orange
-                CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-            new Label
-            {
-                Id = Guid.NewGuid(),
-                BoardId = notification.BoardId,
-                Name = "Priority: Low",
-                HexColor = "#4CAF50", // Green
-                CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-            new Label
-            {
-                Id = Guid.NewGuid(),
-                BoardId = notification.BoardId,
-                Name = "Bug",
-                HexColor = "#F44336", // Bright Red
-                CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-            new Label
-            {
-                Id = Guid.NewGuid(),
-                BoardId = notification.BoardId,
-                Name = "Feature",
-                HexColor = "#2196F3", // Blue
-                CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-            new Label
-            {
-                Id = Guid.NewGuid(),
-                BoardId = notification.BoardId,
-                Name = "Enhancement",
-                HexColor = "#9C27B0", // Purple
-                CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-            new Label
-            {
-                Id = Guid.NewGuid(),
-                BoardId = notification.BoardId,
-                Name = "Documentation",
-                HexColor = "#607D8B", // Blue Grey
-                CreatedAtUtc = now,
-                CreatedBy = creatorId.ToString(),
-                UpdatedBy = null,
-            },
-        ];
+            })
+            .ToList();
     }
 
     /// <summary>
@@ -172,5 +139,23 @@ internal sealed class BoardCreatedIntegrationEventHandler
             return Guid.Empty;
 
         return Guid.TryParse(createdBy, out var guid) ? guid : Guid.Empty;
+    }
+
+    /// <summary>
+    /// Determines if the DbUpdateException is due to a unique constraint violation (duplicate key).
+    /// PostgreSQL error code 23505 indicates unique_violation.
+    /// </summary>
+    private static bool IsDuplicateKeyViolation(DbUpdateException ex)
+    {
+        // Check for PostgreSQL unique constraint violation
+        var innerException = ex.InnerException?.Message ?? string.Empty;
+
+        return innerException.Contains("23505", StringComparison.Ordinal) // PostgreSQL error code
+            || innerException.Contains("duplicate key", StringComparison.OrdinalIgnoreCase)
+            || innerException.Contains("unique constraint", StringComparison.OrdinalIgnoreCase)
+            || innerException.Contains(
+                "IX_Labels_BoardId_Name",
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 }

@@ -20,5 +20,7 @@ public class LabelConfiguration : IEntityTypeConfiguration<Label>
         // Indexes for fast lookup
         builder.HasIndex(l => l.BoardId);
         builder.HasIndex(l => l.Name);
+
+        builder.HasIndex(l => new { l.BoardId, l.Name }).IsUnique();
     }
 }

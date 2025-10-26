@@ -3,17 +3,20 @@ using System;
 using Labels.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Labels.Infrastructure.Migrations
+namespace Labels.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(LabelDbContext))]
-    partial class LabelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251026224300_AddUniqueLabelNameConstraint")]
+    partial class AddUniqueLabelNameConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
