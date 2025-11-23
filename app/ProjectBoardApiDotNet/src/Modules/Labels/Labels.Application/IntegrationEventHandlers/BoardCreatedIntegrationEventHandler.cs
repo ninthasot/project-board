@@ -121,7 +121,7 @@ internal sealed class BoardCreatedIntegrationEventHandler
                 Name = template.Name,
                 HexColor = template.HexColor,
                 CreatedAtUtc = now,
-                CreatedBy = notification.CreatedBy ?? string.Empty,
+                CreatedBy = notification.CreatedBy,
             })
             .ToList();
     }
